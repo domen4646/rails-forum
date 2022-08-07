@@ -1,0 +1,57 @@
+<div class="card">
+  <div class="card-body">
+    <h2>Urejanje profila</h2>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Trenutno čakam na potrditev naslova: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label "Geslo" %> <i>(pustite prazne, če ne želite spremeniti)</i><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+        <% if @minimum_password_length %>
+          <em>minimalna dolžina: <%= @minimum_password_length %> znakov</em>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Potrdite geslo" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Trenutno geslo" %> <i>(potrebujemo vaše trenutno geslo za uveljavitev sprememb)</i><br />
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Slika profila" %><br/>
+        <%= f.file_field :avatar, class: "form-control" %>
+      </div>
+      <br/>
+      <br/>
+
+      <div class="actions text-center">
+        <%= f.submit "Posodobi profil" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<br/>
+<br/>
+
+<div class="card">
+  <div class="card-body">
+    <h3>Brisanje profila</h3>
+
+    <p>Ste nezadovoljni? <%= button_to "Izbriši moj profil", registration_path(resource_name), class: "btn btn-danger", data: { confirm: "Ziher?" }, method: :delete %></p>
+  </div>
+</div>
+<br/>
+<br/>
+
+
+<%= link_to "Nazaj", :back, class: "btn btn-secondary" %>

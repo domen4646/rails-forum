@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="card-body">
+        <% if comment.user.nil? %>
+        <h5 class="d-inline-block text-danger">[IZBRISAN UPORABNIK]</h5>
+        <% else %>
+        <a href="/users/<%= comment.user.id %>" class="text-reset text-decoration-none d-inline-block">
+            <div>
+            <% if comment.user.avatar.attached? %>
+                <img class="rounded-circle d-inline-block" width="32px" height="32px" src="<%=(url_for(comment.user.avatar))%>">
+            <% end %>
+            
+            <h5 class="d-inline-block"><%= render "layouts/username", duser: comment.user %></h5>
+            </div>
+        </a>
+        <% end %>
+        <span class="float-end"><%= comment.created_at.strftime('%a, %d. %b %Y | %H:%M:%S') %></span>
+    </div>
+    <div class="card-body">
+        <pre><%= comment.content %></pre>
+    </div>
+</div>

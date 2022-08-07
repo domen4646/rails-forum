@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-body">
+    <h1>Nova objava</h1>
+
+    <%= render "form", post: @post %>
+  </div>
+</div>
+<br/>
+<br/>
+
+<div>
+  <%= link_to "Nazaj na objave", posts_path, class: "btn btn-secondary" %>
+</div>

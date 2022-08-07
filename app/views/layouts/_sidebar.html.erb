@@ -1,0 +1,36 @@
+<div class="sidebar-base">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <%= link_to "Zaic", root_path, class: "nav-link text-white custom-sidebar-link" %>
+        </li>
+    </ul>
+    <% if user_signed_in? %>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <%= link_to "Uredi Profil", edit_user_registration_path, class: "nav-link text-white custom-sidebar-link" %>
+            </li>
+        </ul>
+    <% end %>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <% if user_signed_in? %>
+                <%= button_to  "Odjava", destroy_user_session_path, :method => :delete, class: "nav-link text-white custom-sidebar-link" %>
+            <% else %>
+                <%= link_to "Prijava", new_user_session_path, class: "nav-link text-white custom-sidebar-link" %>
+            <% end %>
+        </li>
+    </ul>
+    <% unless user_signed_in? %>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <%= link_to "Registracija", new_user_registration_path, class: "nav-link text-white custom-sidebar-link" %>
+            </li>
+        </ul>
+    <% else %>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <%= link_to "Nova Objava", new_post_path, class: "nav-link text-white custom-sidebar-link" %>
+            </li>
+        </ul>
+    <% end %>
+</div>

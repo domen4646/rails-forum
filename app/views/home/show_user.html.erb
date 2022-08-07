@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+    <p>
+        Username: <%= current_user.username %>
+    </p>
+    <p>
+        Email: <%= current_user.email %>
+    </p>
+    <% if current_user.avatar.attached? %>
+        <image src="<%=(url_for(current_user.avatar))%>">
+    <% end %>
+<% else %>
+    <p>Not signed in.</p>
+<% end %>

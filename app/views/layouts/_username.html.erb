@@ -1,0 +1,13 @@
+<% if duser == current_user %>
+    <span class="<%= duser.role_color %>"><%= duser.username %></span>
+    <span class="text-primary">(ti)</span>
+<% else %>
+    <span><%= duser.username %></span>
+    <% if duser.banned? %>
+        <span class="text-danger">(banned)</span>
+    <% elsif duser.mod? %>
+        <span class="text-success">(mod)</span>
+    <% elsif duser.admin? %>
+        <span class="text-warning">(admin)</span>
+    <% end %>
+<% end %>

@@ -1,0 +1,40 @@
+<!--% is_mine = user_signed_in? && current_user == post.user % -->
+<div id="<%= dom_id post %>" class="card" style="width: 800px; margin-bottom: 40px;">
+  <div class="card-body">
+    <% if post.user.nil? %>
+      <h5 class="d-inline-block text-danger">[IZBRISAN UPORABNIK]</h5>
+    <% else %>
+      <a href="/users/<%= post.user.id %>" class="text-reset text-decoration-none d-inline-block">
+        <div>
+          <% if post.user.avatar.attached? %>
+            <img class="rounded-circle d-inline-block" width="32px" height="32px" src="<%=(url_for(post.user.avatar))%>">
+          <% end %>
+          
+          <h5 class="d-inline-block"><%= render "layouts/username", duser: post.user %></h5>
+        </div>
+      </a>
+      <span class="float-end"><%= post.created_at.strftime('%a, %d. %b %Y | %H:%M:%S') %></span>
+
+    <% end %>
+  </div>
+  <div class="card-body">
+    <h2><%= post.title %></h2>
+    <% if post.post_image.attached? %>
+      <img src="<%= (url_for(post.post_image)) %>" class="post-thumbnail-image">
+    <% end %>
+
+    <% unless post.marked_deleted? %>
+      <pre><%= post.content %></pre>
+    <% else %>
+      <pre class="text-danger">[OBJAVA IZBRISANA]</pre>
+    <% end %>
+
+
+    <hr>
+    <p>
+      <%= link_to "Prikaži objavo", post %>
+    </p>
+
+  </div>
+
+</div>

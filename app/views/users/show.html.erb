@@ -1,0 +1,35 @@
+<% if !@user.nil? %>
+    <div class="mt-4 p-5 graybg text-black rounded">
+        <h3><%= render "layouts/username", duser: @user %></h3>
+        <hr>
+        <br/>
+        <table>
+            <tr>
+                <% if @user.avatar.attached? %>
+                    <td class="tableimg">
+                        <img class="rounded-circle d-inline-block" width="128px" height="128px" src="<%=(url_for(@user.avatar))%>">
+                    </td>
+                <% end %>
+                <td class="align-top">
+                    <p>Email: <%= @user.email %></p>
+                </td>
+            </tr>
+        </table>
+        <% if user_signed_in? && current_user != @user && current_user.has_authority_over?(@user) %>
+            <% if @user.banned? %>
+                <%= button_to "Unban", set_role_user_path(@user, role: 1), :method => :post, 'data-turbo': false %>
+            <% else %>
+                <%= button_to "Ban", set_role_user_path(@user, role: 0), :method => :post, 'data-turbo': false %>
+            <% end %>
+
+            <% if current_user.admin? %>
+                <br/>
+                <% if @user.mod? %>
+                    <%= button_to "Demote to regular user", set_role_user_path(@user, role: 1), :method => :post, 'data-turbo': false %>
+                <% else %>
+                    <%= button_to "Promote to mod", set_role_user_path(@user, role: 2), :method => :post, 'data-turbo': false %>
+                <% end %>
+            <% end %>
+        <% end %>
+    </div>
+<% end %>

@@ -1,0 +1,10 @@
+<% if user_signed_in? %>
+    <p>
+        <%= (current_user.banned?) ? "Yes, you are indeed banned" : "Not banned" %>
+    </p>
+    <p>
+        Your status is <%= current_user.role_str %>
+    </p>
+<% else %>
+    <p>Please, sign in</p>
+<% end %>

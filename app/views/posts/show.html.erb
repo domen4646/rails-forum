@@ -1,0 +1,34 @@
+<%= render @post %>
+<% canmodify = user_signed_in? && current_user.has_post_authority?(@post) && !@post.marked_deleted? %>
+
+<div>
+  <% if canmodify %>
+    <div>
+      <%= link_to "Spremeni objavo", edit_post_path(@post), class: "btn btn-primary formbtn float-begin d-inline-block"%>
+      <%= button_to "Izbriši objavo", @post, method: :delete, class: "btn btn-danger formbtn", form_class: "d-inline-block float-end" %>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+  <% end %>
+  <%= link_to "Nazaj na objave", posts_path, class: "btn btn-secondary" %>
+
+
+  <br/>
+  <br/>
+  <hr>
+  <h3>Komentarji</h3>
+  <% post_comments = @post.comments.select(&:persisted?) %>
+  <% if post_comments.any? %>
+    <% post_comments.each do |c| %>
+      <%= render "comments/comment", comment: c %>
+      <br/>
+    <% end %>
+  <% else %>
+    <p>Ta objava še nima komentarjev.</p>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= render "comments/form", comment: @comment %>
+  <% end %>
+</div>

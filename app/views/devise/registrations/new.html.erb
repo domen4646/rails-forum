@@ -1,0 +1,42 @@
+<h2 class="text-center">&#x1F407;Registracija&#x1F407;</h2>
+<div class="card">
+  <div class="card-body">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Uporabniško ime" %><br />
+        <%= f.text_field :username, autocomplete: "username", class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Geslo" %>
+        <% if @minimum_password_length %>
+        <em>najmanj (<%= @minimum_password_length %> znakov)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Potrdite geslo" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+      </div>
+      <br/>
+      <br/>
+
+
+      <div class="actions text-center">
+        <%= f.submit "Registriraj se", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<br/>
+<br/>
+
+<%= render "devise/shared/links" %>

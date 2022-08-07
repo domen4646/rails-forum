@@ -1,0 +1,9 @@
+<div id="posts">
+  <% if @posts.any? %>
+    <% @posts.each do |post| %>
+      <%= render post %>
+    <% end %>
+  <% else %>
+    <h6><strong>Tukaj ni še nobenih objav.</strong></h6>
+  <% end %>
+</div>

@@ -1,0 +1,29 @@
+<%= form_with(model: comment, url: post_comments_path(@post)) do |form| %>
+
+  <% if comment.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% comment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="card">
+    <div class="card-body">
+      <h5><strong>Nov komentar</strong></h5>
+      <div>
+        <%= form.text_area :content, placeholder: "Vsebina komentarja", class: "form-control", rows: 4 %>
+      </div>
+
+
+      <br/>
+      <div class="form-row text-center">
+        <%= form.submit class: "btn btn-primary", value: "Ustvari komentar" %>
+      </div>
+    </div>
+  </div>
+<% end %>
